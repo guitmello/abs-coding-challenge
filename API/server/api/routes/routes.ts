@@ -8,9 +8,9 @@ class Routes {
     initRoutes(app: Application): void {
   
       //users routes
-      app.route('/api/employees/').get(EmployeesRoutes.index);
+      app.route('/api/employees').get(EmployeesRoutes.index);
   
-      app.route('/api/employees/').post(EmployeesRoutes.create);
+      app.route('/api/employees').post(EmployeesRoutes.create);
   
       app.route('/api/employees/:id').get(EmployeesRoutes.findOne);
   
