@@ -23,7 +23,7 @@ class Handlers {
         console.log(`Erro: ${err}`);
         res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({
             code: 'Err-01',
-            messageUser: 'Erro ao criar usuário',
+            messageUser: 'Create employee error',
         });
     }
 }

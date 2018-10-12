@@ -16,7 +16,7 @@ fs.readdirSync(__dirname)
     .filter(function (file) {
     let extension = ".js";
     if (process.env.NODE_ENV == "dev")
-        extension = ".ts";
+        extension = ".js";
     return (file.indexOf(".") !== 0 &&
         file !== basename &&
         file.slice(-3) === `${extension}`);
