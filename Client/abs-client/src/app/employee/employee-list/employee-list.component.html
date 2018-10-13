@@ -1,3 +1,18 @@
-<p>
-  employee-list works!
-</p>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Participação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees.payload">
+      <td>{{employee.id}}</td>
+      <td>{{employee.employee_name}}</td>
+      <td>{{employee.employee_lastName}}</td>
+      <td>{{employee.employee_participation}}%</td>
+    </tr>
+  </tbody>
+</table>

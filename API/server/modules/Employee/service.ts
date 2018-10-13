@@ -16,7 +16,7 @@ class Employee implements IEmployee {
 
   getAll(): Bluebird<IEmployee[]>{
     return model.Employee.findAll({
-      order: ['employee_name']
+      order: ['id']
     })
     .then(createEmployees);
   }

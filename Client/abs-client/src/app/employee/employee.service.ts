@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from './employee.model';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -14,12 +13,12 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployees(): Observable<Employee> {
-    return this.http.get<Employee>(this.API_URL + '/employees');
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.API_URL}/employees`);
   }
 
-  getEmployeesParticipations(): Observable<any> {
-    return this.getEmployees().pipe(map(response => response.employee_participation));
+  createEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(`${this.API_URL}/employees`, employee);
   }
 
 }

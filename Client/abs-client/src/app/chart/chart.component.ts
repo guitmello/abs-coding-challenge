@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee/employee.service';
 import { Chart } from 'chart.js';
+import { Employee } from '../employee/employee.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chart',
@@ -8,46 +10,51 @@ import { Chart } from 'chart.js';
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  participations: [] = [];
+  employees: Employee[] = [];
+  participations: any = [];
+  employeesNames: any = [];
   chart: any;
+  colors: any = [];
 
-  constructor(private emploeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
-    this.getParticipationChart();
+    this.getEmployees();
   }
 
-  getParticipationChart() {
-    this.emploeeService
-      .getEmployeesParticipations()
-      .subscribe(response => (this.participations = response));
+  getEmployees() {
+    return this.employeeService.getEmployees().subscribe(response => {
+      this.employees = response;
+      this.getParticipationChart(this.employees);
+    });
+  }
 
-    this.chart = new Chart('canvas', {
+
+  getParticipationChart(employeeParam) {
+    const employee = employeeParam.payload;
+
+    employee.map(employees => this.participations.push(employees.employee_participation));
+    employee.map(employees => this.employeesNames.push(`${employees.employee_name} ${employees.employee_lastName}`));
+    employee.forEach(employeeColor => {
+      this.colors.push(this.getRandomColor());
+    });
+
+    const canvas: HTMLElement = document.getElementById('canvas');
+    this.chart = new Chart(canvas, {
       type: 'doughnut',
       data: {
+        labels: this.employeesNames,
         datasets: [
           {
             data: this.participations,
-            borderColor: '#3cba9f',
+            backgroundColor: this.colors,
             fill: false
           }
         ]
       },
       options: {
         legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              display: true
-            }
-          ],
-          yAxes: [
-            {
-              display: true
-            }
-          ]
+          display: true
         }
       }
     });

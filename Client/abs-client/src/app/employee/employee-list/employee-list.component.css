@@ -1,0 +1,17 @@
+table {
+  border: 1px solid #394b50;
+  color: #394b50;
+  width: 100%;
+  border-collapse: collapse;
+}
+table th {
+  text-align: left;
+}
+table td,
+table th {
+  padding: 10px;
+  border: 1px solid #394b50;
+}
+table tr:hover {
+  background-color: #f2f2f2;
+}

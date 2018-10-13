@@ -9,7 +9,7 @@ class Employee {
     }
     getAll() {
         return model.Employee.findAll({
-            order: ['employee_name']
+            order: ['id']
         })
             .then(interface_1.createEmployees);
     }
