@@ -47,18 +47,24 @@ export class EmployeeFormComponent implements OnInit {
   nameHasError() {
     if (this.employeeForm.controls['employee_name'].invalid) {
       return this.nameError = true;
+    } else {
+      return this.nameError = false;
     }
   }
 
   lastNameHasError() {
     if (this.employeeForm.controls['employee_lastName'].invalid) {
       return this.lastNameError = true;
+    } else {
+      return this.lastNameError = false;
     }
   }
 
   participationHasError() {
     if (this.employeeForm.controls['employee_participation'].invalid) {
       return this.participationError = true;
+    } else {
+      return this.participationError = false;
     }
   }
 
