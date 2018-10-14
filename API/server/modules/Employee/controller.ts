@@ -23,11 +23,16 @@ class EmployeeController {
   }
 
   createEmployee(req: Request, res: Response){
-    Employee
+    if ( typeof(req.body.employee_participation) !== 'string') {
+      Employee
       .create(req.body)
       .then(_.partial(Handlers.onSuccess, res))
       .catch(_.partial(Handlers.dbErrorHandler, res))
-      .catch(_.partial(Handlers.onError, res, `Error inserting employee`))
+      .catch(_.partial(Handlers.onError, res, `Error inserting employee`));
+    } else {
+      res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send("Participação não é um número");
+    }
+    
   }
 
   updateEmployee(req: Request, res: Response){

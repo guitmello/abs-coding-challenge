@@ -46,7 +46,11 @@ h1 {
     border-radius: 3px;
     color: #ffffff;
     font-weight: bold;
+    transition: all .3s ease-in-out;
 }
 .btn:hover {
     cursor: pointer;
+    color: #00b8e2;
+    background: #ffffff;
+    transition: all .3s ease-in-out;
 }

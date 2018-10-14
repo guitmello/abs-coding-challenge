@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const HTTPStatus = require("http-status");
 const _ = require("lodash");
 const handlers_1 = require("../../api/responses/handlers");
 const service_1 = require("./service");
@@ -18,11 +19,16 @@ class EmployeeController {
             .catch(_.partial(handlers_1.default.onError, res, `Employee not found`));
     }
     createEmployee(req, res) {
-        service_1.default
-            .create(req.body)
-            .then(_.partial(handlers_1.default.onSuccess, res))
-            .catch(_.partial(handlers_1.default.dbErrorHandler, res))
-            .catch(_.partial(handlers_1.default.onError, res, `Error inserting employee`));
+        if (typeof (req.body.employee_participation) !== 'string') {
+            service_1.default
+                .create(req.body)
+                .then(_.partial(handlers_1.default.onSuccess, res))
+                .catch(_.partial(handlers_1.default.dbErrorHandler, res))
+                .catch(_.partial(handlers_1.default.onError, res, `Error inserting employee`));
+        }
+        else {
+            res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send("Participação não é um número");
+        }
     }
     updateEmployee(req, res) {
         const employeeId = parseInt(req.params.id);

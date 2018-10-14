@@ -12,13 +12,16 @@
     <div class="pure-g">
       <div class="row-center">
         <div class="pure-u-md-5-24 pure-u-sm-12-24 p-10">
-          <input class="form-control" type="text" formControlName="employee_name" placeholder="Nome" />
+          <input class="form-control" type="text" formControlName="employee_name" (blur)="nameHasError()" placeholder="Nome" />
+          <small *ngIf="nameError">*Preencha o campo corretamente</small>
         </div>
         <div class="pure-u-md-5-24 pure-u-sm-12-24 p-10">
-          <input class="form-control" type="text" formControlName="employee_lastName" placeholder="Sobrenome" />
+          <input class="form-control" type="text" formControlName="employee_lastName" (blur)="participationHasError()" placeholder="Sobrenome" />
+          <small *ngIf="lastNameError">*Preencha o campo corretamente</small>
         </div>
         <div class="pure-u-md-5-24 pure-u-sm-12-24 p-10">
-          <input class="form-control" type="number" formControlName="employee_participation" placeholder="Participação" />
+          <input class="form-control" type="number" formControlName="employee_participation" (blur)="participationHasError()" placeholder="Participação" maxlength="3" />
+          <small *ngIf="participationError">*Preencha o campo corretamente</small>
         </div>
         <div class="pure-u-md-5-24 pure-u-sm-12-24 p-10">
           <input class="btn" type="submit" value="ENVIAR" [disabled]="!employeeForm.valid" (click)="createEmployee(employeeForm.value)">

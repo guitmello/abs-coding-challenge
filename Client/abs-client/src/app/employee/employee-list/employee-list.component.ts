@@ -9,12 +9,21 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeListComponent implements OnInit {
 
-  @Input() employees: Employee[];
+  public employees: Employee[] = [];
 
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
-    this.employeeService.getEmployees().subscribe(response => this.employees = response);
+    this.employeeService.getEmployees().subscribe(response => {
+      this.employees = response;
+      this.getNewEmployee(this.employees);
+    });
+  }
+
+  getNewEmployee(employees) {
+    return this.employeeService.newEmployee.subscribe(employee => {
+      employees.payload.push(employee.payload);
+    });
   }
 
 }

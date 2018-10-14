@@ -26,9 +26,16 @@ export class ChartComponent implements OnInit {
     return this.employeeService.getEmployees().subscribe(response => {
       this.employees = response;
       this.getParticipationChart(this.employees);
+      this.getNewEmployee(this.employees);
     });
   }
 
+  getNewEmployee(employees) {
+    return this.employeeService.newEmployee.subscribe(employee => {
+      employees.payload.push(employee.payload);
+      this.getParticipationChart(employees);
+    });
+  }
 
   getParticipationChart(employeeParam) {
     const employee = employeeParam.payload;
@@ -38,6 +45,8 @@ export class ChartComponent implements OnInit {
     employee.forEach(employeeColor => {
       this.colors.push(this.getRandomColor());
     });
+
+    console.log(this.employeesNames);
 
     const canvas: HTMLElement = document.getElementById('canvas');
     this.chart = new Chart(canvas, {
@@ -68,4 +77,5 @@ export class ChartComponent implements OnInit {
     }
     return color;
   }
+
 }

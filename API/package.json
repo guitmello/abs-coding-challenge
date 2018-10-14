@@ -4,8 +4,8 @@
   "description": "ABS Coding Challenge",
   "main": "./server/server.ts",
   "scripts": {
-    "dev:server": "set NODE_ENV=dev&& node build/server/server.js",
-    "prod:server": "set NODE_ENV=prod&& node build/server/server.js",
+    "dev:server": "tsc&& set NODE_ENV=dev&& node build/server/server.js",
+    "prod:server": "tsc&& set NODE_ENV=prod&& node build/server/server.js",
     "unit:test": "set NODE_ENV=test&& mocha --opts mocha.opts build/tests/unit/unit.test.js",
     "integration:test": "set NODE_ENV=test&& mocha --opts mocha.opts build/tests/integration/integration.test.js"
   },

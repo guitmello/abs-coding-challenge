@@ -11,9 +11,14 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeFormComponent implements OnInit {
 
   @Output() create = new EventEmitter();
+  control: FormControl;
 
   employeeForm: FormGroup;
   numberPattern = /^[0-9]*$/;
+
+  nameError = false;
+  lastNameError = false;
+  participationError = false;
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -32,10 +37,29 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   createEmployee(employee: Employee) {
-    console.log(employee);
       this.employeeService.createEmployee(employee).subscribe(employeeData => {
-        this.create.emit(employee);
-      });
+        this.employeeService.employeeAdded(employeeData);
+        this.employeeForm.reset();
+      },
+        err => alert(err.error));
+  }
+
+  nameHasError() {
+    if (this.employeeForm.controls['employee_name'].invalid) {
+      return this.nameError = true;
+    }
+  }
+
+  lastNameHasError() {
+    if (this.employeeForm.controls['employee_lastName'].invalid) {
+      return this.lastNameError = true;
+    }
+  }
+
+  participationHasError() {
+    if (this.employeeForm.controls['employee_participation'].invalid) {
+      return this.participationError = true;
+    }
   }
 
 }
