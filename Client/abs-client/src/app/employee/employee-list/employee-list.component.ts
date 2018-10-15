@@ -20,6 +20,7 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
+  // Geting a new employee when created
   getNewEmployee(employees) {
     return this.employeeService.newEmployee.subscribe(employee => {
       employees.payload.push(employee.payload);

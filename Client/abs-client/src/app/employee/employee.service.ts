@@ -17,14 +17,17 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
+  // Get all employees
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.API_URL}/employees`);
   }
 
+  // Create a new employee
   createEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${this.API_URL}/employees`, employee);
   }
 
+  // Event to know which emoloyee was created
   employeeAdded(employee) {
     return this.newEmployee.emit(employee);
   }

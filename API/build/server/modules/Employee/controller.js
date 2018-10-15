@@ -27,7 +27,7 @@ class EmployeeController {
                 .catch(_.partial(handlers_1.default.onError, res, `Error inserting employee`));
         }
         else {
-            res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send("Participação não é um número");
+            res.status(HTTPStatus.BAD_REQUEST).send("Participação não é um número");
         }
     }
     updateEmployee(req, res) {

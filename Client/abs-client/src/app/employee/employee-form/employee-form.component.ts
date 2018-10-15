@@ -36,6 +36,7 @@ export class EmployeeFormComponent implements OnInit {
     });
   }
 
+  // Create a new employee
   createEmployee(employee: Employee) {
       this.employeeService.createEmployee(employee).subscribe(employeeData => {
         this.employeeService.employeeAdded(employeeData);
@@ -44,6 +45,7 @@ export class EmployeeFormComponent implements OnInit {
         err => alert(err.error));
   }
 
+  // Show form errors
   nameHasError() {
     if (this.employeeForm.controls['employee_name'].invalid) {
       return this.nameError = true;
